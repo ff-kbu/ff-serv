@@ -1,7 +1,8 @@
 <% content_for(:javascript) do %>
 	$(function() {
 		init_reg_map();
-		init_auto_complete('#ajax-loader')
+		init_lat_lng_change();
+		init_auto_complete('#ajax-loader');
 	});
 <% end %>
 
@@ -66,9 +67,9 @@
 			<span id="ajax-loader"style="display:none"><%=image_tag 'ajax-loader.gif'%></span> <br /> 
 		<br/>
 		<%= f.label :latitude, 'Lat:'%> 
-		<%= f.text_field :latitude, {:readonly=> true, :size => 8, :class => "latlng"} %> - 
+		<%= f.text_field :latitude, {:readonly=> false, :size => 8, :class => "latlng"} %> -
 		<%= f.label :longitude, 'Lng:'%> 
-		<%= f.text_field :longitude, {:readonly=> true, :size => 8,:class => "latlng"}%>
+		<%= f.text_field :longitude, {:readonly=> false, :size => 8,:class => "latlng"}%>
 	  </div>
 	  <div class="field">
 	    <%= f.label :notice, 'Hinweise:' %><br />

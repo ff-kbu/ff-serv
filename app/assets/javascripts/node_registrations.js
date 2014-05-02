@@ -26,7 +26,7 @@ function init_reg_map(){
 		lat = 50.82990
 		lng = 6.988334655761719
 		zoom = 9
-	} else {
+	}else{
 		// OSM-Div
 		map.nodeMarker = L.marker([lat,lng],{
 			icon: assetIcon,
@@ -65,6 +65,10 @@ function init_auto_complete(ajaxSpinner){
 			}
 		});
 }
+function init_lat_lng_change(){
+	$(node_lat_field).change(function(){ handle_lat_lng_change(); });
+	$(node_lng_field).change(function(){ handle_lat_lng_change(); });
+}
 /**
 Callback for selecting a record within the autocomplete list
 */
@@ -72,25 +76,35 @@ function handle_select(field,selected_element){
 	var map = this.reg_map
 	var lat = selected_element.data.lat
 	var lng = selected_element.data.long
+	move_marker(lat, lng);
+	updateLatitudeLongitude();
+}
+function handle_lat_lng_change(){
+	lat = $( node_lat_field ).val();
+	lng = $( node_lng_field ).val();
+	if(lat=="" || lng == ""){
+		return;  # FIXME - remove Marker
+	}
+	move_marker(lat, lng);
+}
+function move_marker(lat, lng){
 	if(!map.nodeMarker){
-		map.nodeMarker = L.marker([lat,lng],{
+		map.nodeMarker = L.marker([lat, lng], {
 			icon: assetIcon,
 			draggable: true,
 		}).addTo(map);
 	}
-	
+
 	if(!map.nodePopup){
-		map.nodePopup = map.nodeMarker.bindPopup
-			("<b> Bitte bewege mich!</b><br />Ziehe den Marker zum Aufstellort.")
+		map.nodePopup = map.nodeMarker.bindPopup("<b> Bitte bewege mich!</b><br />Ziehe den Marker zum Aufstellort.");
 	}
-	map.nodeMarker.on("dragend",updateLatitudeLongitude)
-	map.nodeMarker.setLatLng([lat,lng])
-	map.setView([lat,lng], 13, true ) 
+	map.nodeMarker.on("dragend", updateLatitudeLongitude);
+	map.nodeMarker.setLatLng([lat, lng]);
+	map.setView([lat, lng], 13, true);
 	map.nodePopup.openPopup();
-	updateLatitudeLongitude();
 }
 function updateLatitudeLongitude(){
 	var latlng = reg_map.nodeMarker.getLatLng()
-	$( node_lat_field ).val(latlng.lat)
-	$( node_lng_field ).val(latlng.lng)	
+	$(node_lat_field).val(latlng.lat);
+	$(node_lng_field).val(latlng.lng);
 }
