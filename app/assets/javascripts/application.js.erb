@@ -46,7 +46,7 @@ function perform_update_node_status(callback){
 	}).error(function(xhr,error, errorThrown) {  
       	if(xhr.status == 0 && !msg_shown){
       		msg_shown = true
-      		alert("Der Browser konnte die Node-Statistik nicht laden - Ggf. verhindert NoScript den CORS-Request")
+      		alert("Der Browser konnte die Node-Statistik nicht laden - Ggf. verhindert NoScript den CORS-Request\nDebug:" + error + "-" + errorThrown)
       	} else if(xhr.status != 0) {
       		alert("Fehler: " + xhr.status + errorThrown);
       	}      	
