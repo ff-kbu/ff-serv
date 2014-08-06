@@ -39,7 +39,7 @@
 		Wird Dein Node nicht gefunden, dann gib MAC-Adresse ein um ihn zu registrieren.<br />(Siehe Aufkleber Rückseite) 
 		<p />
 		<%= form_tag(new_node_registration_path, method: "get") do %>
-  			<%= text_field_tag(:node_mac,'MAC-Adresse', {:size => 17, :id => 'mac_autocomplete'}) %>
+  			<%= text_field_tag(:node_mac, nil, {:placeholder => "MAC-Adresse", :size => 17, :id => 'mac_autocomplete'}) %>
   			<%= submit_tag("Los") %>
   			<span id="ajax-loader"style="display:none"><%=image_tag 'ajax-loader.gif'%></span> 
 		<% end %>
