@@ -41,13 +41,10 @@ function update_node_status(callback){
 		},15000);
 }
 function perform_update_node_status(callback){
-	$.getJSON('http://stat.kbu.freifunk.net/nodes.json', function(data) {
+	$.getJSON('//stat.kbu.freifunk.net/nodes.json', function(data) {
 		callback(data)
 	}).error(function(xhr,error, errorThrown) {  
-      	if(xhr.status == 0 && !msg_shown){
-      		msg_shown = true
-      		alert("Der Browser konnte die Node-Statistik nicht laden - Ggf. verhindert NoScript den CORS-Request\nDebug:" + error + "-" + errorThrown)
-      	} else if(xhr.status != 0) {
+      	if(xhr.status != 0) {
       		alert("Fehler: " + xhr.status + errorThrown);
       	}      	
  	})
