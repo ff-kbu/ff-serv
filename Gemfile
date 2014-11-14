@@ -22,7 +22,7 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
-gem 'jquery-rails'
+gem "jquery-rails", "~> 2.3.0"
 gem 'haml-rails'
 
 # To use ActiveModel has_secure_password
