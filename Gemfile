@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.17'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
-gem "jquery-rails", "~> 2.3.0"
+gem "jquery-rails"
 gem 'haml-rails'
 
 # To use ActiveModel has_secure_password
