@@ -18,9 +18,7 @@ class Node < ActiveRecord::Base
 
   scope :online, joins(:statuses).where(:node_statuses => {:vpn_status_id => VpnStatus.UP.id})
 
-  after_create :add_mac_to_stat
-  
-  # It's offline, 
+  # It's offline,
   def last_status
     @last_status ||= self.statuses.order('created_at DESC').first
   end
@@ -34,12 +32,6 @@ class Node < ActiveRecord::Base
     @status_by_viewpoint ||= Hash[self.statuses.map {|s| [s.viewpoint,s]}]
   end
 
-
-  def add_mac_to_stat
-    uri = URI('http://collectd.kbu.freifunk.net/nodes/add_macs')
-    res = Net::HTTP.post_form(uri, 'mac' => [mac])
-    puts res.body
-  end
 
   def self.unregistered_home(ip_address) 
     Node.unregistered.joins([:statuses]).where(:node_statuses => 
