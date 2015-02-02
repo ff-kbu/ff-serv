@@ -16,17 +16,7 @@
 		<span class="node_reg_value"> 
 			<%= nodes_reg.node_registration.loc_str[0,40] %><%= '...' if nodes_reg.node_registration.loc_str.size > 40%>
 		</span><br />
-		<span class="node_reg_key">Firmware-Version:</span>
-		<span class="node_reg_value"><%= nodes_reg.fw_version %></span><br />
-
-		<span class="node_reg_key">VPN: </span>
-			<% Viewpoint.ord.each do |vp| 
-				st = nodes_reg.status_by_viewpoint[vp] || NodeStatus.new(vpn_status: VpnStatus.DOWN)%>
-				<span class="node_reg_value"><%=vp.name %>:</span>
-				<span class="node_reg_value vpn_status<%=st.vpn_status if st%>"><%= st.vpn_status if st%></span> 
-			<% end %>
-		<br />
-		<span class="node_reg_key">Ping: </span> 
+		<span class="node_reg_key">Ping: </span>
 		<span class="node_reg_value" id="status_rtt_<%=nodes_reg.id%>">&infin;</span> - 
 		<span class="node_reg_key">Loss: </span> 
 		<span class="node_reg_value" id="status_loss_<%=nodes_reg.id%>">100%</span> <br />
@@ -46,11 +36,5 @@
 				</div>
 		<% end %>
 		</span> <br />
-	</td>
-	<td>
-		<div class="node_map" lat="<%= nodes_reg.node_registration.latitude %>" lng="<%= nodes_reg.node_registration.longitude %>" style="height: 160px; width: 400px;">	
-	</td>
-	<td>
-		<img src="<%= ping_image_url(nodes_reg)%>" >
 	</td>
 </tr>
