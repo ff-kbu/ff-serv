@@ -27,9 +27,7 @@ Diese Nodes im Register gespeichert. | <%= check_box_tag 'hide_offline',true, tr
 
 <table>
 	<th>Node</th>
-	<th>Position</th>
 	<th>Erreichbarkeit</th>
-    <!-- <th>Datendurchsatz</th> -->
 	<%= render :partial => "shared/nodes_reg", :collection => @registered %>
 </table>
 <%#= render :partial => 'shared/registered_nodes', :object => @registered   %>

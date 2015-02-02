@@ -2,26 +2,9 @@
 <tr>
 	<th>Node-ID (MAC)</th>
 	<th colspan="2">Ping</th>
-	<th colspan="<%= Viewpoint.cnt %>">
-		VPN-Status
-	</th>
-	<th>Letzte VPN-Status-Änderung</th>
 	<th>Link-Local-Adresse</th>
 	<th>Firmware-Version</th>
 	<th> Registrieren </th>
-	<th> &nbsp; </th>
-</tr>
-<tr>
-	<th>&nbsp;</th>
-	<th class"coll_6">RTT</th>
-	<th class="col_6">Loss</th>
-	<% for vp in Viewpoint.ord %>
-		<th><%= vp.name %></th>
-	<% end %>
-	<th>&nbsp;</th>
-	<th> &nbsp; </th>
-	<th> &nbsp; </th>
-	<th> &nbsp; </th>
 	<th> &nbsp; </th>
 </tr>
 
@@ -31,13 +14,6 @@
 		<td class="monospaced"><%= node.mac %></td>
 		<td class="monospaced t_center" id="status_rtt_<%=node.id%>">&infin;</td>
 		<td class="monospaced t_center" id="status_loss_<%=node.id%>">100%</td>
-			<% vp_s = node.status_by_viewpoint %>
-			<% logger.info "VPs: #{vp_s.inspect}" %>
-			<% for vp in Viewpoint.ord %>
-				<% st = node.status_by_viewpoint[vp] || NodeStatus.new(vpn_status: VpnStatus.DOWN) %>
-				<td><span class="vpn_status<%=st.vpn_status%>"><%= st.vpn_status %></span></td>
-			<% end %> 
-		<td><%= I18n.l(node.last_status.created_at, :format => :short) + " Uhr" if node.statuses.first%> </td>
 		<td class="monospaced"><%= node.link_local_address_short %></td>
 		<td class="monospaced t_center"><%= node.fw_version if node.last_status%></td>
 
