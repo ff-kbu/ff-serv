@@ -72,8 +72,6 @@ class NodeRegistrationsController < ApplicationController
     @registration = NodeRegistration.find(params[:id])
     if permitted_to?(:set_owner, @registration)
       @registration.owner_id = p[:owner_id]
-    else
-      @registration.owner = current_user
     end
     @registration.updater = current_user
 
