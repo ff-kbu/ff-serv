@@ -48,8 +48,6 @@ class NodeRegistrationsController < ApplicationController
     
     if permitted_to?(:set_owner, @registration)
       @registration.owner_id = p[:owner_id]
-    else
-      @registration.owner = current_user
     end
     @registration.creator = current_user
     @registration.updater = current_user
